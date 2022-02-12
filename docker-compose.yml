@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+  admin:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./admin:/admin
+    command: sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DjangoProject_Admin_DEBUG=1
+      - DjangoProject_Admin_SECRET_KEY=$DjangoProject_Admin_SECRET_KEY
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - PGSERVICEFILE=/etc/postgresql/.pg_service.conf
+      - PGPASSFILE=/admin/.my_pgpass
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'db:/var/lib/postgresql'
+
+
+volumes:
+  db:
