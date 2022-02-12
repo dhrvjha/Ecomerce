@@ -1,0 +1,21 @@
+
+# VS Code folder
+.vscode/
+
+# env setup
+myenv/
+# sample data set
+sample/
+
+# python cache
+_pycache_/
+*.pyc
+
+# database
+db.sqlite3
+
+# configration files
+*.conf
+
+# postgres password file
+.my_pgpass
