@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  admin:
+    build:
+      context: .
+    volumes:
+      - static_data:/vol/web
+    environment:
+      - DjangoProject_Admin_SECRET_KEY=$DjangoProject_Admin_SECRET_KEY
+      - DjangoProject_Admin_DEBUG=$DjangoProject_Admin_DEBUG
+      - DjangoProject_Admin_ALLOWED_HOSTS=127.0.0.1, localhost
+  proxy:
+    build:
+      context: ./proxy
+    volumes:
+      - static_data:/vol/static
+    ports:
+      - "8080:8080"
+    depends_on:
+      - admin
+
+
+volumes:
+  static_data:
