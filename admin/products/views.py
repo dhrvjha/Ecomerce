@@ -1,9 +1,11 @@
-from django.shortcuts import render
-from rest_framework import viewsets, status
+from rest_framework import status, viewsets
 from rest_framework.response import Response
+
 from .models import Products
 from .serializers import ProductSerializer
+
 # Create your views here.
+
 
 class ProductViewSet(viewsets.ViewSet):
     def list(self, request):
